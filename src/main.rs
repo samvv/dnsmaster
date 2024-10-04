@@ -62,6 +62,9 @@ async fn main() -> Result<()> {
     let full_domain = matches.get_one::<String>("domain").unwrap();
     let (subdomain, domain) = split_domain(full_domain);
 
+    // OpenProvider.nl lists the root domain as a subdomain
+    let subdomain = if subdomain == "" { domain.clone() } else { subdomain };
+
     username = username.or(get_string_env("OPENPROVIDER_USERNAME"));
     password = password.or(get_string_env("OPENPROVIDER_PASSWORD"));
     token = token.or(get_string_env("OPENPROVIDER_TOKEN"));
