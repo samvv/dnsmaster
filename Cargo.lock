@@ -219,7 +219,6 @@ dependencies = [
  "openprovider",
  "openssl",
  "reqwest 0.12.8",
- "serde_json",
  "tokio",
 ]
 

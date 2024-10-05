@@ -3,7 +3,6 @@ use std::{time::Duration, env::VarError};
 
 use anyhow::Result;
 use reqwest::Client;
-use serde_json::Value;
 use clap::{command, arg, value_parser};
 
 const DEFAULT_REFRESH_TIMEOUT: u64 = 15 * 60;
