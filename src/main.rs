@@ -86,7 +86,11 @@ async fn main() -> Result<()> {
     let mut orig_record = None;
     for record in op_client.list_records(&domain).await? {
         if record.ty == openprovider::RecordType::A && record.name == subdomain {
-            orig_record = Some(record);
+            let mut new_record = record.clone();
+            if record.name == domain {
+                new_record.name = "".to_string();
+            }
+            orig_record = Some(new_record);
             break;
         }
     }
