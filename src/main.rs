@@ -9,14 +9,15 @@ use clap::{command, arg, value_parser};
 const DEFAULT_REFRESH_TIMEOUT: u64 = 15 * 60;
 
 async fn get_ip(client: &mut Client) -> Result<String> {
-    let response = client.get("https://api.ipify.org?format=json")
+    let ip = client.get("https://api.ipify.org")
         .send()
         .await
         .unwrap()
-        .json::<Value>()
+        .text()
         .await
         .unwrap();
-    Ok(response.get("ip").unwrap().as_str().unwrap().to_string())
+    eprintln!("{}", ip);
+    Ok(ip)
 }
 
 fn get_string_env<S: AsRef<str>>(name: S) -> Option<String> {
